@@ -1,18 +1,20 @@
-import arcade
+import random
 
-# Abrir una ventana
-arcade.open_window(600, 600, "Ventana de prueba")
+print("Comienza el juego de adivinar el numero entre 0 y 100")
 
-# Establecer el color de fondo
-arcade.set_background_color(arcade.color.WHITE)
+numeroSecreto = random.randrange(100)
+userGuess = 101
+numeroIntentos = 6
 
-# Función que se llama para dibujar en la pantalla
-def on_draw():
-    arcade.start_render()
-    arcade.draw_text("¡Hola, Arcade!", 200, 300, arcade.color.BLACK, 24)
+for i in range(numeroIntentos):
 
-# Asignar la función `on_draw` al evento de dibujo
-arcade.set_draw_function(on_draw)
+    while numeroSecreto != userGuess:
 
-# Ejecutar el juego
-arcade.run()
+            userGuess = int(input("Jugador, ingrese su numero, dispone de " + str(numeroIntentos - i) +" intentos:"))
+            if userGuess > numeroSecreto:
+                print("El numero buscado es mas pequeño")
+            elif userGuess < numeroSecreto:
+                print("El numero buscado es mas grande")
+            else:
+                print("¡Usted ha acertado! Jugador gana")
+
