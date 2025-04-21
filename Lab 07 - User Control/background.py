@@ -33,22 +33,24 @@ def draw_background():
     arcade.draw_ellipse_filled(600 + 30, 400 + 50, 70, 30, arcade.color.DARK_GREEN)
 
 
-def draw_coche():
-    # Carroceria del coche
-    arcade.draw_lrbt_rectangle_filled(250, 380, 130, 250, arcade.color.RED)
-    arcade.draw_lrbt_rectangle_filled(210, 470, 130, 190, arcade.color.RED)
-    arcade.draw_triangle_filled(250, 250, 220, 190, 250, 190, arcade.color.RED)
-    arcade.draw_triangle_filled(380, 250, 440, 190, 380, 190, arcade.color.RED)
+def draw_coche(x, y):
+    # Desfase horizontal y vertical según la posición base x, y
+
+    # Carrocería del coche
+    arcade.draw_lrbt_rectangle_filled(x, x + 130, y, y + 120, arcade.color.RED)
+    arcade.draw_lrbt_rectangle_filled(x - 40, x + 220, y, y + 60, arcade.color.RED)
+    arcade.draw_triangle_filled(x, y + 120, x - 30, y + 60, x, y + 60, arcade.color.RED)
+    arcade.draw_triangle_filled(x + 130, y + 120, x + 190, y + 60, x + 130, y + 60, arcade.color.RED)
 
     # Ventanas
-    arcade.draw_triangle_filled(250, 245, 225, 190, 250, 190, arcade.color.LIGHT_BLUE)
-    arcade.draw_triangle_filled(380, 245, 435, 190, 380, 190, arcade.color.LIGHT_BLUE)
-    arcade.draw_lrbt_rectangle_filled(340, 380, 190, 245, arcade.color.LIGHT_BLUE)
-    arcade.draw_lrbt_rectangle_filled(255, 335, 190, 245, arcade.color.LIGHT_BLUE)
+    arcade.draw_triangle_filled(x, y + 115, x - 25, y + 60, x, y + 60, arcade.color.LIGHT_BLUE)
+    arcade.draw_triangle_filled(x + 130, y + 115, x + 185, y + 60, x + 130, y + 60, arcade.color.LIGHT_BLUE)
+    arcade.draw_lrbt_rectangle_filled(x + 90, x + 130, y + 60, y + 115, arcade.color.LIGHT_BLUE)
+    arcade.draw_lrbt_rectangle_filled(x + 5, x + 85, y + 60, y + 115, arcade.color.LIGHT_BLUE)
 
     # Ruedas
-    arcade.draw_circle_filled(250, 130, 25, arcade.color.BLACK)
-    arcade.draw_circle_filled(430, 130, 25, arcade.color.BLACK)
+    arcade.draw_circle_filled(x, y, 25, arcade.color.BLACK)
+    arcade.draw_circle_filled(x + 180, y, 25, arcade.color.BLACK)
 
 
 # Open up a window.
@@ -56,7 +58,7 @@ arcade.open_window(800, 600, "Coche en la carretera")
 setup_background()
 arcade.start_render()
 draw_background()
-
+draw_coche(100, 100)
 # --- Finish drawing ---
 arcade.finish_render()
 
