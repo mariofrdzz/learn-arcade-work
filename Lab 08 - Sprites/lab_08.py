@@ -9,6 +9,13 @@ COIN_COUNT = 50
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
+class Coin(arcade.Sprite):
+
+    def update(self):
+        self.center_y -= 1
+
+        if self.top < 0:
+            self.bottom = SCREEN_HEIGHT
 
 class MyGame(arcade.Window):
 
@@ -49,7 +56,7 @@ class MyGame(arcade.Window):
 
         for i in range(COIN_COUNT):
             # Create the coin instance
-            coin = arcade.Sprite("coin.png", SPRITE_SCALING_COIN)
+            coin = Coin("coin.png", SPRITE_SCALING_COIN)
 
             # Position the coin
             coin.center_x = random.randrange(SCREEN_WIDTH)
@@ -67,6 +74,10 @@ class MyGame(arcade.Window):
         output = f"Score: {self.score}"
         arcade.draw_text(output, 10, 20, arcade.color.WHITE, 14)
 
+        if len(self.coin_list) == 0:
+            output = f"NATHAN DEJÓ LA POBREZA"
+            arcade.draw_text(output, 10, SCREEN_HEIGHT/2, arcade.color.WHITE, 52)
+
     def on_mouse_motion(self, x, y, dx, dy):
         """ Handle Mouse Motion """
 
@@ -79,7 +90,8 @@ class MyGame(arcade.Window):
 
         # Call update on all sprites (The sprites don't do much in this
         # example though.)
-        self.coin_list.update()
+        for coin in self.coin_list:
+            coin.update()
 
         # Generate a list of all sprites that collided with the player.
         coins_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.coin_list)
@@ -88,7 +100,6 @@ class MyGame(arcade.Window):
         for coin in coins_hit_list:
             coin.remove_from_sprite_lists()
             self.score += 1
-
 
 def main():
     """ Main method """
