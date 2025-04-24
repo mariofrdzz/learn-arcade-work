@@ -1,5 +1,4 @@
 
-import random
 import arcade
 
 SPRITE_SCALING_PLAYER = 0.05
